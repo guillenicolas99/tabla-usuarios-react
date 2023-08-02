@@ -1,9 +1,13 @@
 
 import { sortBy } from "../types/types"
 import Icons from "../assets/icons/icons"
+import { useState } from "react"
 
 
-export default function Users({changSort, deleteUser, showColors, users}) {
+export default function Users({changSort, deleteUser, showColors, users, loading, num}) {
+    
+    if (loading) return <h2 className='loading'> LOADING... </h2>
+
     return (
         <table className="table-home">
             <thead>
@@ -23,10 +27,11 @@ export default function Users({changSort, deleteUser, showColors, users}) {
                     users.map((user, index) => {
                         const background = index % 2 === 0 ? 'bg-1' : 'bg-2'
                         const color = showColors ? background : 'hover'
+                        num++
 
                         return (
                             <tr key={user.email} className={color}>
-                                <th>{index + 1}</th>
+                                <th> {num} </th>
                                 <th>
                                     <img src={user.picture.thumbnail} alt={user.name.first} />
                                 </th>

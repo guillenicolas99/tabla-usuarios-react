@@ -17,6 +17,9 @@ export default function ListOfUsers({ params }) {
     const [filterCountry, setFilterCountry] = useState(null)
     const [showColors, setShowColors] = useState(false)
 
+    const num = (page * 20) - 20
+
+
 
     useEffect(function () {
         setLoading(true)
@@ -82,7 +85,10 @@ export default function ListOfUsers({ params }) {
 
     }, [filteredUSers, sorting])
 
-    if (loading) return <h2 className='loading'> LOADING... </h2>
+    const resetFilter = () => {
+        setFilterCountry(null)
+    }
+
 
     return (
         <>
@@ -95,14 +101,14 @@ export default function ListOfUsers({ params }) {
                 }} />
             </header>
 
-            <section>
-                <Users users={sortedUsers} deleteUser={handdleDelete} showColors={showColors} changSort={changeSorting} />
+            <Link className='links-btn' to="/">Ir a Inicio</Link>
+            <section className="table-section">
+                <Users users={sortedUsers} deleteUser={handdleDelete} showColors={showColors} changSort={changeSorting} loading={loading} num={num} />
             </section>
 
             <footer>
-                <Link className='links-btn' to="../">Ir a Inicio</Link>
-                {page !== '1' && <Link className="links-btn" to={info.page - 1}> <Icons icon={'uil-angle-left-b'} /> </Link>}
-                <Link className="links-btn" to={info.page + 1}> <Icons icon={'uil-angle-right-b'} /> </Link>
+                {page !== '1' && <Link onClick={resetFilter} className="links-btn" to={info.page - 1}> <Icons icon={'uil-angle-left-b'} /> </Link>}
+                <Link onClick={resetFilter} className="links-btn" to={info.page + 1}> <Icons icon={'uil-angle-right-b'} /> </Link>
             </footer>
         </>
     )
