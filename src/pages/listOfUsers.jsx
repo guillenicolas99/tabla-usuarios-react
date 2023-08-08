@@ -1,14 +1,14 @@
 import Icons from "../assets/icons/icons"
 import { useEffect, useState, useRef, useMemo } from 'react'
 import getUsers from '../services/getUsers'
-import { Link } from 'wouter'
+import { Link, useParams } from 'react-router-dom'
 import { sortBy } from "../types/types"
 import Users from "../components/users"
 import '../App.css'
 
-export default function ListOfUsers({ params }) {
+export default function ListOfUsers() {
 
-    const { page } = params
+    let { page } = useParams()
     const [loading, setLoading] = useState(true)
     const initialUser = useRef([])
     const [users, setUsers] = useState([])
@@ -17,7 +17,7 @@ export default function ListOfUsers({ params }) {
     const [filterCountry, setFilterCountry] = useState(null)
     const [showColors, setShowColors] = useState(false)
 
-    const num = (page * 20) - 20
+    let num = (page * 20) - 20
 
 
 
@@ -108,7 +108,7 @@ export default function ListOfUsers({ params }) {
 
             <footer>
                 {page !== '1' && <Link onClick={resetFilter} className="links-btn" to={info.page - 1}> <Icons icon={'uil-angle-left-b'} /> </Link>}
-                <Link onClick={resetFilter} className="links-btn" to={info.page + 1}> <Icons icon={'uil-angle-right-b'} /> </Link>
+                <Link onClick={resetFilter} className="links-btn" to={`/users/${ parseInt(page) +1 }`}> <Icons icon={'uil-angle-right-b'} /> </Link>
             </footer>
         </>
     )
