@@ -3,7 +3,7 @@ import { useEffect, useState, useRef, useMemo } from 'react'
 import getUsers from '../services/getUsers'
 import { Link } from 'wouter'
 import { sortBy } from "../types/types"
-import Users from "./users"
+import Users from "../components/users"
 import '../App.css'
 
 export default function ListOfUsers({ params }) {

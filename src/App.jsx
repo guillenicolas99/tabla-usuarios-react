@@ -1,7 +1,7 @@
 import { Route } from 'wouter'
-import ListOfUsers from './components/listOfUsers'
+import ListOfUsers from './pages/listOfUsers'
 import HomePage from './pages/home'
-
+ 
 function App() {
 
   return (
